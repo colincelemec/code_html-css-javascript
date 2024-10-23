@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<meta charset="UTF-8">
+<head>
+    <title>Esercizio per gestire Stringhe e Array in JS</title>
+    <script type="text/javascript">
+        function GesticiFrase(){
+
+            var frase = document.getElementById("frase").value;
+            var parole = frase.split(" ");
+            mostraElenco(parole, "listaOriginale");
+
+            var paroleMaiuscolo = parole.map(function(parola){
+                return parola.toUpperCase();
+            })
+
+            mostraElenco(paroleMaiuscolo, "listaMaiuscola")
+
+        }
+
+        function mostraElenco(parole, idLista){
+            var lista = document.getElementById(idLista);
+            lista.innerHTML = "";
+            parole.forEach(function(parola) {
+                var li=document.createElement("li");
+                li.textContent = parola;
+                lista.appendChild(li);
+            });
+        }
+
+        document.write('schermo: ' + screen.width+ 'x' + screen.height+ ' pixel<br>');
+
+    </script>
+
+</head>
+<body>
+    <h1>Creiamo un form che ci permette di entrare una frase, la dividi in parole e la trasforma</h1>
+    <form onsubmit="event.preventDefault(); GesticiFrase();">
+        <label for="frase">Frase:</label><br>
+        <input type="text" id="frase" name="frase"><br><br>
+
+        <input type="submit" value="Dividi e Trasforma">
+        
+    </form>
+
+    <h2>Elenco delle parole</h2>
+    <ul id="listaOriginale"></ul>
+
+    <h2>Elenco delle parole maiuscole </h2>
+    <ul id="listaMaiuscola"></ul>
+
+
+</body>
+</html>
