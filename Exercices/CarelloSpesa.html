@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <title>Carello della spesa</title>
+    <script type="text/javascript">
+        function Prodotto(nome, prezzo, categoria){
+            this.categoria =categoria;
+            this.prezzo=prezzo;
+            this.nome=nome;
+
+            //Aggiungo un metodo mostradettagli() all'ogetto prodotto che restituisce una stringa con i dettagli del prodotto in forma leggibile
+            this.mostradettagli() = function(){
+                return `Prodotto: ${this.nome}, prezzo: €${this.prezzo.toFixed(2)}, categoria: ${this.categoria}`;
+            };
+
+           
+        }
+
+        //Definizione del construttore carello()
+
+       function carello(){
+        this.Prodotti=[];
+        this.totale = 0;
+
+        //metodo per aggiungere un nuovo prodotto al carello
+        this.aggiungiprodotto = function(prodotto){
+            this.prodotti.push(prodotto);
+            this.totale += prodotto.prezzo;
+        };
+
+        //metodo per mostrare il totale del carello
+        this.totalecarello = function(){
+            return `€${this.totale.toFixed(2)}`;
+        };
+
+        
+
+       }
+
+       //creazione di un nuovo carello
+
+       var carello = new carello();
+
+       //funzione per aggiungere un nuovo prodotto al carello e mostrare i dettagli
+       function aggiungiprodottoalcarello(){
+        //recupero dei valori del form
+        var nomeprodotto = document.getElementById("nomeProdotto").value;
+        var prezzoprodotto = parseFloat(getElementById("prezzoProdotto").value);
+        var categoriaprodotto = document.getElementById("categoriaProdotto").value;
+
+        //creazione di un nuovo ogetto prodotto usando il "costruttore"
+        var nuovoprodotto = new Prodotto(nomeprodotto, prezzoprodotto, categoriaprodotto);
+
+        //aggiunta del prodotto al carello
+        carello.aggiungiprodotto(nuovoprodotto);
+
+        //mostra dei dettagli dei prodotti nella pagina
+        document.getElementById("dettagliprodotto").textContent  = nuovoprodotto.mostradettagli();
+
+        //mostra il totale del carello nella pagina
+        document.getElementById("totalecarello").textContent = carello.totalecarello();
+
+        //visualizza l'ogetto prodetto e il carello nella console del debug
+
+        console.log(nuovoprodotto);
+        console.log(carello);
+
+       }
+
+
+    </script>
+</head>
+<body>
+    <h1>AGGIUNGI UN PRODOTTO AL CARELLO</h1>
+    <form onsubmit="event.preventDefault(); aggiungiprodottoalcarello();">
+    <label for="nomeProdotto">Nome Prodotto:</label><br>  
+    <input type="text" id="nomeProdotto" name="nomeProdotto" required><br><br> 
+
+    <label for="prezzoProdotto">Prezzo Prodotto:</label><br>  
+    <input type="number" id="prezzoProdotto" name="prezzoProdotto" step="0.01"><br><br> 
+
+    <label for="categoriaProdotto">Categoria Prodotto:</label><br>  
+    <input type="text" id="categoriaProdotto" name="categoriaProdotto" required><br><br> 
+    <input type="submit" value="Aggiungi al carello">
+    </form>
+
+    <h2>DETTAGLI DEL PRODOTTO AGGIUNTO:</h2>
+    <p id="dettagliprodotto"></p>
+
+    <h2>TOTALE CARELLO</h2>
+    <p id="totalecarello"></p>
+</body>
+
+</html>
+
